@@ -32,7 +32,7 @@ routes.patch('/profile', auth, async (req, res) => {
     try {
         const updates = Object.keys(req.body)
         const reporter = await Reporter.findById(req.reporter._id)
-        if (!reporter) return res.send('Please login to view your profile')
+        if (!reporter) return res.send('Please login to view your profile!')
         updates.forEach(i => reporter[i] = req.body[i])
         await reporter.save()
         res.send(reporter)
