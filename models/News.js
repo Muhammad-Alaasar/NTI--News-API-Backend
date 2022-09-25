@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const schema = new mongoose.Schema({
     title: {
         type: String,
@@ -14,13 +13,16 @@ const schema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    poster: {
-        // type: mongoose.Schema.Types.ObjectId,
+    image: {
         type: String,
+        default: 'images/news.jpg'
+    },
+    poster: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        // ref: 'Reporter'
+        ref: 'Reporter'
     }
-    
+
 })
 
 const News = mongoose.model('News', schema)

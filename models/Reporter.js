@@ -49,18 +49,24 @@ const schema = new mongoose.Schema({
     }
 })
 
-schema.pre('save', async function(){
-    if (this.isModified('password')){
+schema.virtual('news', {
+    localField: '_id',
+    foreignField: 'poster',
+    ref: 'News'
+})
+
+schema.pre('save', async function () {
+    if (this.isModified('password')) {
         this.password = await bcryptjs.hash(this.password, 8)
     }
 })
 
-schema.methods.generateToken = function(){
-    return jwt.sign({_id: this._id.toString()}, (process.env.SECRET_KEY || 'newsAPI'))
+schema.methods.generateToken = function () {
+    return jwt.sign({ _id: this._id.toString() }, (process.env.SECRET_KEY || 'newsAPI'))
 }
 
 schema.statics.findByCredentials = async (email, password) => {
-    const reporter = await Reporter.findOne({email})
+    const reporter = await Reporter.findOne({ email })
     if (!reporter) throw new Error("Please recheck your email or password")
 
     const isMatch = await bcryptjs.compare(password, reporter.password)
@@ -68,7 +74,6 @@ schema.statics.findByCredentials = async (email, password) => {
 
     return reporter
 }
-
 
 const Reporter = mongoose.model('Reporter', schema)
 

@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000
 require('./db/connect')
 
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 const newsRoutes = require('./routes/news')
 app.use(newsRoutes)
