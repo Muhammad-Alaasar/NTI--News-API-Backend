@@ -5,7 +5,7 @@ const routes = express.Router()
 const auth = require('../middlewares/auth')
 const News = require('../models/News')
 
-routes.post('/addNews', (req, res) => {
+routes.post('/addNews', auth, (req, res) => {
     const news = new News({ ...req.body, poster: req.reporter._id })
     news.save()
         .then(() => res.send(news))
