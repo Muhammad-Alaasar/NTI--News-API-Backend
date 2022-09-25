@@ -16,7 +16,7 @@ routes.get('/myNews', auth, (req, res) => {
     req.reporter.populate('news')
         .then(data => {
             if (!data) return res.send("You don't have any news")
-            res.send(data)
+            res.send(data.news)
         }).catch(e => res.send(e))
 })
 
