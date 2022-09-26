@@ -1,6 +1,6 @@
 # News API (Back-end)
 
-> #### Create a backend of News API by node js
+> #### A Backend of News API by node js
 ##### by _Muhammad Al-Aasar_
 
 ## 
